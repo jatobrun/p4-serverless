@@ -5,7 +5,7 @@ import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { TodoItem } from '../models/TodoItem'
 
 const todoAccess = new TodoAccess()
-const bucketName = process.env.IMAGES_S3_BUCKET
+const bucketName = process.env.S3_BUCKET
 
 // createTodo
 export async function createTodo(newTodo: CreateTodoRequest, userId: string) {

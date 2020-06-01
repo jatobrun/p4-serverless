@@ -5,11 +5,12 @@ import { APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult } f
 import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
 import { parseUserId } from '../../auth/utils'
 import { updateTodo } from '../../businessLogic/todos'
+import { createLogger } from '../../utils/logger'
 
-// const docClient = new AWS.DynamoDB.DocumentClient()
-// const todosTable = process.env.TODOS_TABLE
 
+const logger = createLogger('updateTodo')
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  logger.info('Processing event: ', event)
   const todoId = event.pathParameters.todoId
   const todoInput: UpdateTodoRequest = JSON.parse(event.body)
   console.log('[update todo]: Processing event: ', event)

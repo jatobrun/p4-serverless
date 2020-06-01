@@ -2,9 +2,12 @@ import 'source-map-support/register'
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
 import { deleteTodo } from '../../businessLogic/todos'
 import { parseUserId } from '../../auth/utils';
+import { createLogger } from '../../utils/logger'
 
 
+const logger = createLogger('deleteTodo')
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  logger.info('Processing event: ', event)
   const todoId = event.pathParameters.todoId
   const authorization = event.headers.Authorization;
   const split = authorization.split(' ');

@@ -4,12 +4,12 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } f
 import { parseUserId } from '../../auth/utils'
 import { getAllTodos } from '../../businessLogic/todos'
 
-// const docClient = new AWS.DynamoDB.DocumentClient()
+import { createLogger } from '../../utils/logger'
 
-// const todosTable = process.env.TODOS_TABLE
-
+const logger = createLogger('getTodos')
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   // TODO: Get all TODO items for a current user
+  logger.info('Processing event: ', event)
   console.log('Caller  event', event)
   const authorization = event.headers.Authorization
   const jwtToken = authorization.split(' ')[1]
